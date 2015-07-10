@@ -12,14 +12,14 @@ class Ejercicio1(unittest.TestCase):
         self.browser = webdriver.Firefox()
         self.browser.get('http://10.28.148.127/wordpress')
 
-    def tesst_case_one(self):
+    def test_case_one(self):
         """
         Navegar al sitio.
         Validar que la pagina sea la esperada en base a su titulo
         """
         assert "Automation Training" in self.browser.title
 
-    def tesst_case_two(self):
+    def test_case_two(self):
         """
         Realizar una búsqueda
         Validar si hay resultados
@@ -29,7 +29,7 @@ class Ejercicio1(unittest.TestCase):
         elem.send_keys(Keys.RETURN)
         assert "Nothsing Found" not in self.browser.page_source
 
-    def tesst_case_three(self):
+    def test_case_three(self):
         """
         Validar que la fecha que se muestra para un post en la pagina principal
         coincida con la fecha al ingresar al post
@@ -40,7 +40,7 @@ class Ejercicio1(unittest.TestCase):
         secondDateElemText = self.browser.find_element_by_xpath('//*[@id="post-41"]/header/div/a/time').text
         assert dateElemText == secondDateElemText
 
-    def tesst_case_four(self):
+    def test_case_four(self):
         """
         Ingresar a 'Contact us'
         Completar cada uno de los campos con valores correctos
