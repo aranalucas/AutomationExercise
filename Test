@@ -108,10 +108,24 @@ class Automation(unittest.TestCase):
         Ingresar en el primer día que tenga posts
         Contar la cantidad de posts que hay para ese día e imprimir los títulos por consola
         """
+        october_calendar = self.browser.find_element_by_xpath('//*[@id="prev"]/a')
+        october_calendar.click()
 
-        tableElem = Select(self.browser.find_element_by_id('wp-calendar'))
-        print tableElem.options
+        calendar_elem = self.browser.find_element_by_id('wp-calendar')
+        td_elements = calendar_elem.find_elements(By.TAG_NAME, "td")
 
+        for day in td_elements:
+            day_with_posts = day.find_elements(By.TAG_NAME, 'a')
+
+            if day_with_posts:
+                day_with_posts[0].click()
+                post_titles = self.browser.find_elements_by_class_name('entry-header')
+                print "Amount of Posts", len(post_titles)
+                for post in post_titles:
+                    title = post.find_elements(By.TAG_NAME, 'a')
+                    print title[0].title
+                    # Esto falla. Tengo que ver como pararme en un header y poder imprimirlo. 
+                break
 
 
 
