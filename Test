@@ -5,31 +5,35 @@ import unittest
 import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
 
-class Ejercicio1(unittest.TestCase):
+class Automation(unittest.TestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
         self.browser.get('http://10.28.148.127/wordpress')
 
-    def test_case_one(self):
+
+# Exercise 1
+
+    def __test_case_one(self):
         """
         Navegar al sitio.
         Validar que la pagina sea la esperada en base a su titulo
         """
         assert "Automation Training" in self.browser.title
 
-    def test_case_two(self):
+    def __test_case_two(self):
         """
         Realizar una búsqueda
         Validar si hay resultados
         """
         elem = self.browser.find_element_by_id('s')
-        elem.send_keys("Hello World")
+        elem.send_keys("Software")
         elem.send_keys(Keys.RETURN)
-        assert "Nothsing Found" not in self.browser.page_source
+        assert "Nothing Found" not in self.browser.page_source
 
-    def test_case_three(self):
+    def __test_case_three(self):
         """
         Validar que la fecha que se muestra para un post en la pagina principal
         coincida con la fecha al ingresar al post
@@ -40,7 +44,7 @@ class Ejercicio1(unittest.TestCase):
         secondDateElemText = self.browser.find_element_by_xpath('//*[@id="post-41"]/header/div/a/time').text
         assert dateElemText == secondDateElemText
 
-    def test_case_four(self):
+    def __test_case_four(self):
         """
         Ingresar a 'Contact us'
         Completar cada uno de los campos con valores correctos
@@ -65,7 +69,7 @@ class Ejercicio1(unittest.TestCase):
 
         #Averiguar como se valida que realmente mande mi mensaje sin chequearlo con texto.
 
-    def test_case_five(self):
+    def __test_case_five(self):
         """
         Ingresar a 'Contact us'
         Omitir completar uno o varios campos
@@ -96,8 +100,26 @@ class Ejercicio1(unittest.TestCase):
 
         submitField.click()
 
-    def tearDown(self):
-        self.browser.close()
+    def test_case_six(self):
+        """
+        Ir a la página principal
+        Utilizando el calendario:
+        Verificar cuantos días del mes actual tienen posts
+        Ingresar en el primer día que tenga posts
+        Contar la cantidad de posts que hay para ese día e imprimir los títulos por consola
+        """
+
+        tableElem = Select(self.browser.find_element_by_id('wp-calendar'))
+        print tableElem.options
+
+
+
+
+    # def tearDown(self):
+    #     self.browser.close()
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
