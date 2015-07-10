@@ -13,6 +13,9 @@ class Automation(unittest.TestCase):
         self.browser = webdriver.Firefox()
         self.browser.get('http://10.28.148.127/wordpress')
 
+    def tearDown(self):
+        self.browser.close()
+
 
 # Exercise 1
 
@@ -120,19 +123,11 @@ class Automation(unittest.TestCase):
             if day_with_posts:
                 day_with_posts[0].click()
                 post_titles = self.browser.find_elements_by_class_name('entry-header')
-                print "Amount of Posts", len(post_titles)
+                print "Amount of Posts:", len(post_titles)
                 for post in post_titles:
                     title = post.find_elements(By.TAG_NAME, 'a')
-                    print title[0].title
-                    # Esto falla. Tengo que ver como pararme en un header y poder imprimirlo. 
+                    print title[0].text
                 break
-
-
-
-    # def tearDown(self):
-    #     self.browser.close()
-
-
 
 
 if __name__ == '__main__':
